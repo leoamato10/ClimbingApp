@@ -61,7 +61,7 @@ const Map = () => {
             <Marker
               coordinate={routes[index].location}
               key={index}
-              ref={callOut}
+              ref={callOutRef}
             >
               <Callout>
                 <Text>{routes[index].title}</Text>
