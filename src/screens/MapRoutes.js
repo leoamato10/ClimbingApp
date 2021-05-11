@@ -13,6 +13,7 @@ import {
 import Colors from "../shared/colors";
 
 import Map from "../components/map";
+// import CarouselMap from "../components/mapClass1";
 
 const Home = ({ navigation }) => {
   return (
@@ -57,8 +58,8 @@ const Home = ({ navigation }) => {
       </Header>
       <Content>
         <Map />
+        {/* <CarouselMap /> COMPONENT TO TEST CALLOUT FROM MARKERS*/}
       </Content>
-      {/* </ImageBackground> */}
     </Container>
   );
 };

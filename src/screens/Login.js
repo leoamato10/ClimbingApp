@@ -1,15 +1,7 @@
 import React from "react";
 import { Image, Text, StyleSheet, ImageBackground } from "react-native";
-import {
-  Button,
-  Container,
-  Content,
-  View,
-  Item,
-  Input,
-  Icon,
-} from "native-base";
-import { Col, Row, Grid } from "react-native-easy-grid";
+import { Button, View, Item, Input, Icon } from "native-base";
+
 import Colors from "../shared/colors";
 
 const Home = ({ navigation }) => {
@@ -18,17 +10,15 @@ const Home = ({ navigation }) => {
       source={require("../../assets/images/login_background.jpg")}
       style={styles.Container}
     >
-      <Grid>
-        <Row style={styles.row1}>
-          <Image
-            style={styles.image}
-            source={require("../../assets/logo/logo.png")}
-          />
+      <View>
+        <View style={styles.logo}>
+          <Image source={require("../../assets/logo/logo.png")} />
           <Text style={styles.Text}>CLIMBING LOC</Text>
-        </Row>
-        <Row style={styles.row2}>
-          <View style={styles.inputsContainer}>
-            <Item regular style={{ backgroundColor: "#5B5B5B4F" }}>
+        </View>
+
+        <View style={{ padding: 15 }}>
+          <View>
+            <Item regular style={{ backgroundColor: "#ccc", marginBottom: 10 }}>
               <Input
                 placeholder="Usuario"
                 placeholderTextColor={Colors.primary}
@@ -37,7 +27,7 @@ const Home = ({ navigation }) => {
                 style={{ color: "white" }}
               />
             </Item>
-            <Item regular style={{ backgroundColor: "#5B5B5B4F" }}>
+            <Item regular style={{ backgroundColor: "#ccc", marginBottom: 20 }}>
               <Input
                 placeholder="Contraseña"
                 placeholderTextColor={Colors.primary}
@@ -53,32 +43,48 @@ const Home = ({ navigation }) => {
                 style={{ fontSize: 25, color: Colors.primary }}
               />
             </Item>
+          </View>
+
+          <View>
             <Button
               full
               primary
-              style={styles.buttons}
               onPress={() => navigation.navigate("HomeNav")}
+              style={{ marginBottom: 10 }}
             >
               <Text style={styles.buttonText}>INGRESAR</Text>
             </Button>
+            <View style={styles.buttonsContainer}>
+              <Button
+                style={{
+                  width: "47%",
+                  justifyContent: "center",
+                  backgroundColor: "#ccc",
+                }}
+              >
+                <Icon
+                  type="FontAwesome"
+                  name="google"
+                  style={{ color: Colors.primary }}
+                />
+              </Button>
+              <Button
+                style={{
+                  width: "47%",
+                  justifyContent: "center",
+                  backgroundColor: "#ccc",
+                }}
+              >
+                <Icon
+                  type="FontAwesome"
+                  name="facebook"
+                  style={{ color: Colors.primary }}
+                />
+              </Button>
+            </View>
           </View>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              width: "80%",
-              marginBottom: 50, //aca hay van a haber problemas
-            }}
-          >
-            <Button light style={{ width: 100, justifyContent: "center" }}>
-              <Icon type="FontAwesome" name="google" />
-            </Button>
-            <Button light style={{ width: 100, justifyContent: "center" }}>
-              <Icon type="FontAwesome" name="facebook" />
-            </Button>
-          </View>
-        </Row>
-      </Grid>
+        </View>
+      </View>
     </ImageBackground>
   );
 };
@@ -87,27 +93,17 @@ const styles = StyleSheet.create({
   Container: {
     ...StyleSheet.absoluteFillObject,
   },
-  row1: {
+  logo: {
     height: "40%",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-
     marginTop: 100,
   },
-  row2: {
-    flexDirection: "column",
+  buttonsContainer: {
+    flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center",
-  },
-  inputsContainer: {
-    marginTop: 150,
-    width: "80%",
-    height: 180,
-    justifyContent: "space-between",
-  },
-  buttons: {
-    justifyContent: "center",
+    marginBottom: 50, //aca hay van a haber problemas
   },
   Text: {
     color: Colors.primary,

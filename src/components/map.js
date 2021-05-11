@@ -10,7 +10,7 @@ import RoutesListCmp from "../components/routesListCmp";
 const Map = () => {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
-  const [markers, setMarkers] = useState([]);
+  const [markers, setMarkers] = useState([1]);
   const routes = useSelector((state) => state.routes.routes);
   const map = useRef();
   const callOutRef = useRef();
@@ -28,7 +28,7 @@ const Map = () => {
     })();
   }, []);
 
-  onCarouselItemChange = (index) => {
+  const onCarouselItemChange = (index) => {
     const location = routes[index];
 
     map.current.animateToRegion({
@@ -39,6 +39,9 @@ const Map = () => {
     });
 
     // callOutRef.current.markers[index].showCallout();
+    // setMarkers(callOutRef.current);
+    callOutRef.current.showCallout();
+    console.log(markers);
   };
 
   return (
