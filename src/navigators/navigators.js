@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
@@ -8,6 +8,7 @@ import colors from "../shared/colors";
 
 import { DrawerContent } from "./drawerContent";
 import Login from "../screens/Login";
+import CreateAccount from "../screens/CreateAccount";
 import MapRoutes from "../screens/MapRoutes";
 import ListRoutes from "../screens/ListRoutes";
 import DoneRoutes from "../screens/DoneRoutes";
@@ -15,12 +16,15 @@ import routeDetail from "../screens/routeDetail";
 import DownloadedRoutes from "../screens/DownloadedRoutes";
 import Config from "../screens/Config";
 import Help from "../screens/Help";
+import { useSelector } from "react-redux";
 
 const LoginStack = createStackNavigator();
 const ListRoutesStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const Navigators = () => {
+  const auth = useSelector((state) => state.auth);
+
   return (
     <NavigationContainer>
       <LoginStack.Navigator
@@ -28,9 +32,15 @@ const Navigators = () => {
           headerShown: false,
         }}
       >
-        <LoginStack.Screen name="Login" component={Login} />
-        <LoginStack.Screen name="HomeNav" component={HomeNav} />
-        <LoginStack.Screen name="routeDetail" component={routeDetail} />
+        {auth.user == null ? (
+          <>
+            <LoginStack.Screen name="Login" component={Login} />
+            <LoginStack.Screen name="CreateAccount" component={CreateAccount} />
+            <LoginStack.Screen name="routeDetail" component={routeDetail} />
+          </>
+        ) : (
+          <LoginStack.Screen name="HomeNav" component={HomeNav} />
+        )}
       </LoginStack.Navigator>
     </NavigationContainer>
   );

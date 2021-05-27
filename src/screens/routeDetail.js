@@ -32,7 +32,7 @@ const routeDetail = ({ navigation, route }) => {
   const toggleDownloadedHandler = () => {
     dispatch(toggleDownloaded(item.id));
   };
-  console.log(isDownloaded);
+
   return (
     <Container style={styles.Container}>
       <Header transparent>

@@ -17,7 +17,7 @@ import {
 
 import Colors from "../shared/colors";
 
-const Login = ({ navigation }) => {
+const CreateAccount = ({ navigation }) => {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
 
@@ -28,13 +28,17 @@ const Login = ({ navigation }) => {
     >
       <View style={{ flex: 1, paddingBottom: 150 }}>
         <View
-          style={{ alignItems: "flex-end", paddingTop: 20, paddingRight: 20 }}
+          style={{ alignItems: "flex-start", paddingTop: 20, paddingLeft: 20 }}
         >
-          <TouchableOpacity
-            onPress={() => navigation.navigate("CreateAccount")}
-          >
-            <Text style={styles.buttonText}>Crear cuenta</Text>
-          </TouchableOpacity>
+          <Icon
+            type="MaterialIcons"
+            name="arrow-back"
+            style={{
+              fontSize: 30,
+              color: "white",
+            }}
+            onPress={() => navigation.goBack()}
+          />
         </View>
 
         <View style={styles.logo}>
@@ -48,18 +52,18 @@ const Login = ({ navigation }) => {
           <View>
             <Item regular style={{ backgroundColor: "#ccc", marginBottom: 10 }}>
               <Input
-                placeholder="Usuario"
+                placeholder="Ingresar Email"
                 placeholderTextColor={Colors.primary}
                 autoCorrect={false}
                 autoCapitalize="none"
-                style={{ color: Colors.primary }}
+                style={{ color: "white" }}
                 onChangeText={(user) => dispatch(emailChanged(user))}
                 value={auth.email}
               />
             </Item>
             <Item regular style={{ backgroundColor: "#ccc", marginBottom: 20 }}>
               <Input
-                placeholder="Contraseña"
+                placeholder="Ingresar Contraseña"
                 placeholderTextColor={Colors.primary}
                 autoCorrect={false}
                 textContentType="password"
@@ -95,7 +99,7 @@ const Login = ({ navigation }) => {
               {auth.loading ? (
                 <Spinner color="white" />
               ) : (
-                <Text style={styles.buttonText}>INGRESAR</Text>
+                <Text style={styles.buttonText}>CREAR NUEVA CUENTA</Text>
               )}
             </Button>
 
@@ -127,21 +131,6 @@ const Login = ({ navigation }) => {
                 />
               </Button>
             </View>
-          </View>
-
-          {/* RECUPERAR CONTRASEÑA */}
-          <View style={{ alignItems: "center" }}>
-            <Text style={{ color: "white" }}>
-              ¿Olvidaste tu contraseña?{" "}
-              <Text
-                style={{
-                  color: Colors.primary,
-                  fontWeight: "bold",
-                }}
-              >
-                Recuperar contraseña.
-              </Text>
-            </Text>
           </View>
         </View>
       </View>
@@ -179,4 +168,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Login;
+export default CreateAccount;

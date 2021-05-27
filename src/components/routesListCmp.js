@@ -1,6 +1,6 @@
 import React from "react";
-import { Container, Content, Icon, Header, Left, View } from "native-base";
-import { FlatList, StyleSheet, TouchableOpacity } from "react-native";
+import { View } from "native-base";
+import { FlatList, TouchableOpacity } from "react-native";
 
 import RouteItem from "./routeItemCmp";
 

@@ -1,8 +1,7 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import {
   Container,
-  Content,
   Header,
   List,
   ListItem,
@@ -11,19 +10,19 @@ import {
   Icon,
   Button,
   Body,
-  Drawer,
   Thumbnail,
-  Right,
 } from "native-base";
-import {
-  // DrawerContentScrollView,
-  // DrawerItem,
-  DrawerItemList,
-} from "@react-navigation/drawer";
+import { DrawerItemList } from "@react-navigation/drawer";
+
+import { useDispatch, useSelector } from "react-redux";
 
 import Colors from "../shared/colors";
+import { userLogout } from "../Store/actions/auth";
 
 export function DrawerContent(props) {
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+
   return (
     <Container style={{ flex: 1 }}>
       <Header transparent>
@@ -49,15 +48,13 @@ export function DrawerContent(props) {
               large
               style={{ marginHorizontal: 20 }}
               source={{
-                uri:
-                  "http://mendifilmfestival.com/MFF/images/2015/Invitados/DariusZaluski.jpg",
+                uri: "http://mendifilmfestival.com/MFF/images/2015/Invitados/DariusZaluski.jpg",
               }}
             />
             <Text>Ignacio Rodriguez</Text>
           </View>
 
           <DrawerItemList {...props} />
-          {/* </DrawerContentScrollView> */}
         </View>
         <View>
           <List>
@@ -95,7 +92,7 @@ export function DrawerContent(props) {
                 />
               </Body>
             </ListItem>
-            <ListItem icon>
+            <ListItem icon onPress={() => dispatch(userLogout())}>
               <Left>
                 <Icon
                   type="AntDesign"

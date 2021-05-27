@@ -1,15 +1,6 @@
 import React from "react";
-import {
-  Container,
-  Body,
-  Right,
-  Icon,
-  Header,
-  Left,
-  View,
-  Text,
-} from "native-base";
-import { StyleSheet } from "react-native";
+import { Container, Right, Icon, Header, Left, View, Text } from "native-base";
+
 import { useSelector } from "react-redux";
 
 import RoutesListCmp from "../components/routesListCmp";
@@ -18,7 +9,7 @@ const RoutesScreen = ({ navigation }) => {
   const routes = useSelector((state) => state.routes.routes);
 
   return (
-    <Container style={styles.Container}>
+    <Container>
       <Header transparent>
         <Left
           style={{
@@ -61,10 +52,3 @@ const RoutesScreen = ({ navigation }) => {
 };
 
 export default RoutesScreen;
-
-const styles = StyleSheet.create({
-  Container: {
-    // backgroundColor: "gray",
-    // flex: 1,
-  },
-});

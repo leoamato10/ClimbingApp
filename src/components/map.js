@@ -29,19 +29,15 @@ const Map = () => {
   }, []);
 
   const onCarouselItemChange = (index) => {
-    const location = routes[index];
+    const route = routes[index];
 
     map.current.animateToRegion({
-      latitude: location.location.latitude,
-      longitude: location.location.longitude,
+      latitude: route.location.latitude,
+      longitude: route.location.longitude,
       latitudeDelta: 0.4,
       longitudeDelta: 0.055,
     });
-
-    // callOutRef.current.markers[index].showCallout();
-    // setMarkers(callOutRef.current);
-    callOutRef.current.showCallout();
-    console.log(markers);
+    // callOutRef.current.showCallout(index);
   };
 
   return (

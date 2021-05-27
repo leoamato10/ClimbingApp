@@ -19,7 +19,6 @@ const DoneRoutes = ({ navigation }) => {
     (state) => state.routes.downloadedRoutes
   );
 
-  console.log(downloadedRoutes.length);
   return (
     <Container style={styles.Container}>
       <Header transparent>
