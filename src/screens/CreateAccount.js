@@ -16,6 +16,7 @@ import {
 } from "../Store/actions/auth";
 
 import Colors from "../shared/colors";
+import { createAccountWithEmail } from "../Store/actions/auth";
 
 const CreateAccount = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -93,7 +94,9 @@ const CreateAccount = ({ navigation }) => {
             <Button
               full
               primary
-              onPress={() => dispatch(loginUser(auth.email, auth.password))}
+              onPress={() =>
+                dispatch(createAccountWithEmail(auth.email, auth.password))
+              }
               style={{ marginBottom: 10 }}
             >
               {auth.loading ? (

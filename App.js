@@ -8,7 +8,7 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import firebase from "firebase";
 
-import Navigators from "./src/navigators/navigators";
+import RootNavigator from "./src/navigators/RootNavigator";
 import routesReducer from "./src/Store/reducers/routes";
 import loginReducer from "./src/Store/reducers/auth";
 
@@ -43,7 +43,7 @@ export default function App() {
   return (
     <StyleProvider style={getTheme(material)}>
       <Provider store={store}>
-        <Navigators />
+        <RootNavigator />
       </Provider>
     </StyleProvider>
   );

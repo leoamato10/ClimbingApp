@@ -1,4 +1,6 @@
 import firebase from "firebase";
+import * as SecureStore from "expo-secure-store";
+
 import {
   EMAIL_CHANGED,
   PASSWORD_CHANGED,
@@ -23,33 +25,39 @@ export const passwordChanged = (text) => {
 };
 
 export const loginUser = (email, password) => {
-  return async (dispatch) => {
-    dispatch({ type: LOGIN_USER });
+  const save = async (key, value) => {
+    await SecureStore.setItemAsync(key, value);
+  };
 
-    await firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then((user) => {
-        dispatch({ type: LOGIN_USER_SUCCESS, payload: user });
-      })
-      .catch((error) => {
-        dispatch({ type: LOGIN_USER_FAIL, payload: error.message });
-      });
+  return async (dispatch) => {
+    try {
+      dispatch({ type: LOGIN_USER });
+      await firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password)
+        .then((user) => {
+          save("key", user.user.uid);
+          dispatch({ type: LOGIN_USER_SUCCESS, payload: user });
+        });
+    } catch (error) {
+      dispatch({ type: LOGIN_USER_FAIL, payload: error.message });
+    }
   };
 };
 
 export const userLogout = () => {
   return async (dispatch) => {
-    await firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        dispatch({ type: USER_LOGOUT });
-        navigation.navigate("Login");
-      })
-      .catch((error) => {
-        console.log("LOGOUT ERROR: ", error);
-      });
+    try {
+      await firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          SecureStore.deleteItemAsync("key");
+          dispatch({ type: USER_LOGOUT });
+        });
+    } catch (error) {
+      console.log("LOGOUT ERROR: ", error);
+    }
   };
 };
 
@@ -59,7 +67,7 @@ export const createAccountWithEmail = (email, password) => {
 
     firebase
       .auth()
-      .signInWithEmailAndPassword(email, password)
+      .createUserWithEmailAndPassword(email, password)
       .then((user) => {
         dispatch({ type: LOGIN_USER_SUCCESS, payload: user });
       })
