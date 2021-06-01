@@ -15,36 +15,15 @@ import * as Linking from "expo-linking";
 import { StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
 
+import ScreenHeader from "../components/screensHeader";
 import RoutesListCmp from "../components/routesListCmp";
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 const Help = ({ navigation }) => {
   const routes = useSelector((state) => state.routes.routes);
 
   return (
     <Container style={styles.Container}>
-      <Header transparent>
-        <Left
-          style={{
-            flex: 1,
-            flexDirection: "row",
-            alignItems: "center",
-          }}
-        >
-          <Icon
-            type="MaterialCommunityIcons"
-            name="menu"
-            style={{
-              fontSize: 35,
-              color: "black",
-            }}
-            onPress={() => navigation.toggleDrawer()}
-          />
-          <Text style={{ fontSize: 20, paddingLeft: 15 }} numberOfLines={1}>
-            Ayuda
-          </Text>
-        </Left>
-      </Header>
+      <ScreenHeader title="Ayuda" navigation={navigation} />
       <Content style={{ padding: 10 }}>
         <Card>
           <CardItem>

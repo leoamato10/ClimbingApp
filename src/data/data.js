@@ -19,6 +19,7 @@ export const ROUTES = [
       { name: "La gruta", rating: 5 },
       { name: "La rosa mosqueta", rating: 5 },
     ],
+    "http://2.bp.blogspot.com/-LnjIM8eemOo/TzbB3lTKhSI/AAAAAAAABdI/o9JaILya_yQ/w1200-h630-p-k-no-nu/6.jpg",
     { latitude: -32.9582254, longitude: -68.8930443 }
   ),
   new Route(
@@ -39,6 +40,7 @@ export const ROUTES = [
       { name: "La gruta", rating: 5 },
       { name: "La rosa mosqueta", rating: 5 },
     ],
+    "http://2.bp.blogspot.com/-LnjIM8eemOo/TzbB3lTKhSI/AAAAAAAABdI/o9JaILya_yQ/w1200-h630-p-k-no-nu/6.jpg",
     { latitude: -32.9482254, longitude: -68.8830443 }
   ),
   new Route(
@@ -52,6 +54,7 @@ export const ROUTES = [
     20,
     6,
     [{ name: "La esquina", rating: 5 }],
+    "http://2.bp.blogspot.com/-LnjIM8eemOo/TzbB3lTKhSI/AAAAAAAABdI/o9JaILya_yQ/w1200-h630-p-k-no-nu/6.jpg",
     { latitude: -32.9382254, longitude: -68.8730443 }
   ),
   new Route(
@@ -69,6 +72,7 @@ export const ROUTES = [
       { name: "La ola", rating: 2 },
       { name: "La escuela", rating: 3 },
     ],
+    "http://2.bp.blogspot.com/-LnjIM8eemOo/TzbB3lTKhSI/AAAAAAAABdI/o9JaILya_yQ/w1200-h630-p-k-no-nu/6.jpg",
     { latitude: -32.9282254, longitude: -68.8630443 }
   ),
   new Route(
@@ -89,6 +93,7 @@ export const ROUTES = [
       { name: "La gruta", rating: 5 },
       { name: "La rosa mosqueta", rating: 5 },
     ],
+    "http://2.bp.blogspot.com/-LnjIM8eemOo/TzbB3lTKhSI/AAAAAAAABdI/o9JaILya_yQ/w1200-h630-p-k-no-nu/6.jpg",
     { latitude: -32.9882254, longitude: -68.8530443 }
   ),
   new Route(
@@ -105,6 +110,7 @@ export const ROUTES = [
       { name: "La escuela", rating: 3 },
       { name: "La placa", rating: 4 },
     ],
+    "http://2.bp.blogspot.com/-LnjIM8eemOo/TzbB3lTKhSI/AAAAAAAABdI/o9JaILya_yQ/w1200-h630-p-k-no-nu/6.jpg",
     { latitude: -32.9982254, longitude: -68.8430443 }
   ),
   new Route(
@@ -121,6 +127,7 @@ export const ROUTES = [
       { name: "La gruta", rating: 5 },
       { name: "La rosa mosqueta", rating: 5 },
     ],
+    "http://2.bp.blogspot.com/-LnjIM8eemOo/TzbB3lTKhSI/AAAAAAAABdI/o9JaILya_yQ/w1200-h630-p-k-no-nu/6.jpg",
     { latitude: -32.5512254, longitude: -68.8490443 }
   ),
   new Route(
@@ -138,40 +145,7 @@ export const ROUTES = [
       { name: "La ola", rating: 2 },
       { name: "La escuela", rating: 3 },
     ],
+    "http://2.bp.blogspot.com/-LnjIM8eemOo/TzbB3lTKhSI/AAAAAAAABdI/o9JaILya_yQ/w1200-h630-p-k-no-nu/6.jpg",
     { latitude: -32.9512254, longitude: -68.8230443 }
-  ),
-  new Route(
-    "c9",
-    "French",
-    64,
-    "#L1",
-    "CAT1",
-    "https://static.dw.com/image/48396304_303.jpg",
-    false,
-    12,
-    3,
-    [
-      { name: "La esquina", rating: 5 },
-      { name: "La ola", rating: 2 },
-      { name: "La escuela", rating: 3 },
-    ],
-    { latitude: -32.9512254, longitude: -68.920443 }
-  ),
-  new Route(
-    "c10",
-    "Summer",
-    64,
-    "#L1",
-    "CAT1",
-    "https://static.dw.com/image/48396304_303.jpg",
-    false,
-    12,
-    3,
-    [
-      { name: "La esquina", rating: 5 },
-      { name: "La ola", rating: 2 },
-      { name: "La escuela", rating: 3 },
-    ],
-    { latitude: -32.9512254, longitude: -68.8580443 }
   ),
 ];

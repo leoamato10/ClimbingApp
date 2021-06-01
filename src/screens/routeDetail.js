@@ -1,20 +1,12 @@
 import React from "react";
-import {
-  Container,
-  Content,
-  Icon,
-  Header,
-  Left,
-  Text,
-  Body,
-  Right,
-  View,
-} from "native-base";
-import { StyleSheet } from "react-native";
+import { Container, Icon, Left, Text, Right, View } from "native-base";
+import { StyleSheet, Image, Dimensions } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 
 import { toggleDownloaded } from "../Store/actions/routes";
 import { FlatList } from "react-native-gesture-handler";
+
+import RouteDetailHeader from "../components/routeDetailHeader";
 
 const ListItem = (props) => {
   return (
@@ -23,6 +15,8 @@ const ListItem = (props) => {
     </View>
   );
 };
+
+const screenWidth = Dimensions.get("window").width;
 
 const routeDetail = ({ navigation, route }) => {
   const routes = useSelector((state) => state.routes.routes);
@@ -35,41 +29,43 @@ const routeDetail = ({ navigation, route }) => {
 
   return (
     <Container style={styles.Container}>
-      <Header transparent>
-        <Left style={{ flex: 1 }}>
-          <Icon
-            type="MaterialIcons"
-            name="arrow-back"
-            style={{
-              fontSize: 35,
-              color: "black",
+      {/* HEADER */}
+      <RouteDetailHeader item={item} navigation={navigation} />
+
+      {/* CONTENEDOR GENERAL */}
+      <View style={{ flex: 1 }}>
+        {/* IMAGEN */}
+        <View style={{ backgroundColor: "lightgray" }}>
+          <Image
+            style={{ width: screenWidth, height: 450 }}
+            source={{
+              uri: "https://escalandocommx.files.wordpress.com/2017/01/rutas-8-11-escuelita-cu-a.jpg",
             }}
-            onPress={() => navigation.goBack()} //corregir navegacion (pasar de stack a drawer)
           />
-        </Left>
-        <Body>
-          <Text>{item.title}</Text>
-        </Body>
-        <Right>
-          <Icon
-            type="MaterialCommunityIcons"
-            name="information"
+          <View
             style={{
-              fontSize: 35,
-              color: "black",
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              with: 150,
+              height: 60,
+              padding: 20,
             }}
-            onPress={() => navigation.goBack()} //corregir navegacion (pasar de stack a drawer)
-          />
-        </Right>
-      </Header>
-      <View style={{ padding: 10 }}>
-        <View style={{ paddingBottom: 100, backgroundColor: "lightgray" }}>
-          <Text>Dificultad</Text>
-          <Text>{item.difficulty}</Text>
+          >
+            <Text style={{ fontSize: 25, color: "white", fontWeight: "bold" }}>
+              Dificultad
+            </Text>
+            <Text style={{ fontSize: 25, color: "white" }}>
+              {item.difficulty}
+            </Text>
+          </View>
         </View>
-        <View style={{ flexDirection: "row", padding: 15 }}>
+
+        <View style={{ flexDirection: "row", padding: 10 }}>
           <Left>
-            <Text>Subsectores</Text>
+            <Text style={{ fontSize: 22 }}>Subsectores</Text>
           </Left>
           <Right>
             <Icon
@@ -83,7 +79,9 @@ const routeDetail = ({ navigation, route }) => {
             />
           </Right>
         </View>
-        <View style={{ flexDirection: "column" }}>
+
+        {/* LISTA DE SUBSECTORES */}
+        <View style={{ paddingBottom: 500, backgroundColor: "#ccc" }}>
           <FlatList
             data={item.subsectores}
             keyExtractor={(item) => item.name}
@@ -101,8 +99,9 @@ const styles = StyleSheet.create({
   listItem: {
     marginVertical: 10,
     marginHorizontal: 10,
-    borderColor: "#ccc",
+    backgroundColor: "white",
+    borderColor: "white",
     borderWidth: 1,
-    paddingVertical: 10,
+    padding: 10,
   },
 });

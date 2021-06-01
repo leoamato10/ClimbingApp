@@ -5,7 +5,7 @@ import * as Location from "expo-location";
 import { useSelector } from "react-redux";
 import Carousel from "react-native-snap-carousel";
 
-import RoutesListCmp from "../components/routesListCmp";
+import RoutesListCmp from "./routesListCmp";
 
 const Map = () => {
   const [location, setLocation] = useState(null);
@@ -13,7 +13,7 @@ const Map = () => {
   const [markers, setMarkers] = useState([1]);
   const routes = useSelector((state) => state.routes.routes);
   const map = useRef();
-  const callOutRef = useRef();
+  const callOutRef = useRef([]);
 
   useEffect(() => {
     (async () => {
@@ -37,7 +37,7 @@ const Map = () => {
       latitudeDelta: 0.4,
       longitudeDelta: 0.055,
     });
-    // callOutRef.current.showCallout(index);
+    callOutRef.current[index].showCallout();
   };
 
   return (
@@ -60,7 +60,7 @@ const Map = () => {
             <Marker
               coordinate={routes[index].location}
               key={index}
-              ref={callOutRef}
+              ref={(ref) => (callOutRef.current[index] = ref)}
             >
               <Callout>
                 <Text>{routes[index].title}</Text>

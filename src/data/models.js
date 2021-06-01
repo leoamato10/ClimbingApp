@@ -10,6 +10,7 @@ class Route {
     kms,
     rating,
     subsectores,
+    subsectores_pic,
     location
   ) {
     this.id = id;
@@ -22,6 +23,7 @@ class Route {
     this.kms = kms;
     this.rating = rating;
     this.subsectores = subsectores;
+    this.subsectores_pic = subsectores_pic;
     this.location = location;
   }
 }

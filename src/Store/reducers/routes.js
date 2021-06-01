@@ -1,5 +1,5 @@
 import { ROUTES } from "../../data/data";
-import { TOGGLE_DOWNLOADED, GET_ROUTES } from "../actions/routes";
+import { TOGGLE_DOWNLOADED } from "../actions/routes";
 
 const initialState = {
   routes: ROUTES,
@@ -11,8 +11,6 @@ const initialState = {
 
 const routesReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_ROUTES:
-      return action.payload;
     case TOGGLE_DOWNLOADED:
       const existingIndex = state.downloadedRoutes.findIndex(
         (route) => route.id === action.routeId

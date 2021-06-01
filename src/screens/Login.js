@@ -92,7 +92,7 @@ const Login = ({ navigation }) => {
               onPress={() => dispatch(loginUser(auth.email, auth.password))}
               style={{ marginBottom: 10 }}
             >
-              {auth.loading ? (
+              {auth.isLoading ? (
                 <Spinner color="white" />
               ) : (
                 <Text style={styles.buttonText}>INGRESAR</Text>

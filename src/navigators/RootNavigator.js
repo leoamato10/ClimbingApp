@@ -6,11 +6,11 @@ import DrawerNavigator from "./DrawerNavigator";
 import Login from "../screens/Login";
 import CreateAccount from "../screens/CreateAccount";
 import Splash from "../screens/Splash";
-import routeDetail from "../screens/routeDetail";
 
 import * as SecureStore from "expo-secure-store";
 import { useSelector, useDispatch } from "react-redux";
 import { RESTORE_TOKEN } from "../Store/actions/authTypes";
+import { loginUser } from "../Store/actions/auth";
 
 const LoginStack = createStackNavigator();
 
@@ -20,13 +20,10 @@ const RootNavigator = () => {
 
   useEffect(() => {
     const getKey = async () => {
-      let userToken;
-
       try {
-        userToken = await SecureStore.getItemAsync("key");
-        (await userToken)
-          ? dispatch({ type: RESTORE_TOKEN, payload: userToken })
-          : null;
+        const email = await SecureStore.getItemAsync("email");
+        const password = await SecureStore.getItemAsync("password");
+        !email || !password ? null : dispatch(loginUser(email, password));
       } catch (e) {
         console.log(e);
       }
@@ -59,13 +56,12 @@ const RootNavigator = () => {
   return (
     <NavigationContainer>
       <LoginStack.Navigator screenOptions={stackNavigatorOptions}>
-        {!auth.userToken == null ? (
+        {auth.isLoading ? (
           <LoginStack.Screen name="Splash" component={Splash} />
         ) : !auth.user ? (
           <>
             <LoginStack.Screen name="Login" component={Login} />
             <LoginStack.Screen name="CreateAccount" component={CreateAccount} />
-            <LoginStack.Screen name="routeDetail" component={routeDetail} />
           </>
         ) : (
           <LoginStack.Screen

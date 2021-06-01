@@ -1,6 +1,6 @@
 import React from "react";
-import { Container, Text, Icon, Header, Left, View } from "native-base";
-import { StyleSheet } from "react-native";
+import { View } from "native-base";
+
 import { useSelector } from "react-redux";
 
 import ScreenHeader from "../components/screensHeader";
@@ -10,12 +10,12 @@ const RoutesScreen = ({ navigation }) => {
   const routes = useSelector((state) => state.routes.routes);
 
   return (
-    <Container>
-      <ScreenHeader title="Configuracion" navigation={navigation} />
+    <View style={{ backgroundColor: "white" }}>
+      <ScreenHeader title="Listado de Rutas" navigation={navigation} />
       <View style={{ padding: 10 }}>
-        <Text>Config Screen</Text>
+        <RoutesListCmp routes={routes} navigation={navigation} />
       </View>
-    </Container>
+    </View>
   );
 };
 

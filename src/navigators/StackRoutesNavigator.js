@@ -1,17 +1,21 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-const ListRoutesStack = createStackNavigator();
+import RoutesList from "../screens/RoutesList";
+import RouteDetail from "../screens/RouteDetail";
+
+const RoutesListStack = createStackNavigator();
+
+const stackNavigatorOptions = {
+  headerShown: false,
+};
 
 const StackRoutesNavigator = () => {
   return (
-    <ListRoutesStack.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-      <ListRoutesStack.Screen name="ListRoutes" component={ListRoutes} />
-    </ListRoutesStack.Navigator>
+    <RoutesListStack.Navigator screenOptions={stackNavigatorOptions}>
+      <RoutesListStack.Screen name="RoutesList" component={RoutesList} />
+      <RoutesListStack.Screen name="RouteDetail" component={RouteDetail} />
+    </RoutesListStack.Navigator>
   );
 };
 

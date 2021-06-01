@@ -4,13 +4,13 @@ import { FlatList, TouchableOpacity } from "react-native";
 
 import RouteItem from "./routeItemCmp";
 
-const RoutesListCmp = (props) => {
+const RoutesListCmp = ({ routes, navigation }) => {
   const renderRouteItem = ({ item }) => {
     return (
       <TouchableOpacity
-        onPress={() => props.navigation.navigate("routeDetail", { item })}
+        onPress={() => navigation.navigate("RouteDetail", { item })}
       >
-        <RouteItem item={item} navigation={props.navigation} />
+        <RouteItem item={item} navigation={navigation} />
       </TouchableOpacity>
     );
   };
@@ -18,7 +18,7 @@ const RoutesListCmp = (props) => {
   return (
     <View style={{ padding: 10 }}>
       <FlatList
-        data={props.listData}
+        data={routes}
         showsVerticalScrollIndicator={false}
         renderItem={renderRouteItem}
       />

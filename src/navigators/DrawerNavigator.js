@@ -32,7 +32,7 @@ const DrawerNavigator = () => {
         }}
       />
       <Drawer.Screen
-        name="StackRoutesNavigator"
+        name="RoutesList"
         component={StackRoutesNavigator}
         options={{
           title: "Vista de Lista",
@@ -60,7 +60,7 @@ const DrawerNavigator = () => {
         }}
       />
       <Drawer.Screen
-        name="Escaladas"
+        name="RealizedRoutes"
         component={DoneRoutes}
         options={{
           title: "Vias escaladas",
@@ -88,7 +88,7 @@ const DrawerNavigator = () => {
         }}
       />
       <Drawer.Screen
-        name="Ayuda"
+        name="Help"
         component={Help}
         options={{
           title: "Ayuda",

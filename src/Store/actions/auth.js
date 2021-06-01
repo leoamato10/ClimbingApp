@@ -31,14 +31,13 @@ export const loginUser = (email, password) => {
 
   return async (dispatch) => {
     try {
-      dispatch({ type: LOGIN_USER });
-      await firebase
+      await dispatch({ type: LOGIN_USER });
+      const user = await firebase
         .auth()
-        .signInWithEmailAndPassword(email, password)
-        .then((user) => {
-          save("key", user.user.uid);
-          dispatch({ type: LOGIN_USER_SUCCESS, payload: user });
-        });
+        .signInWithEmailAndPassword(email, password);
+      await save("email", email);
+      await save("password", password);
+      await dispatch({ type: LOGIN_USER_SUCCESS, payload: user });
     } catch (error) {
       dispatch({ type: LOGIN_USER_FAIL, payload: error.message });
     }
@@ -48,40 +47,23 @@ export const loginUser = (email, password) => {
 export const userLogout = () => {
   return async (dispatch) => {
     try {
-      await firebase
-        .auth()
-        .signOut()
-        .then(() => {
-          SecureStore.deleteItemAsync("key");
-          dispatch({ type: USER_LOGOUT });
-        });
+      await firebase.auth().signOut();
+      await SecureStore.deleteItemAsync("email");
+      await SecureStore.deleteItemAsync("password");
+      await dispatch({ type: USER_LOGOUT });
     } catch (error) {
       console.log("LOGOUT ERROR: ", error);
     }
   };
 };
 
-export const createAccountWithEmail = (email, password) => {
-  return (dispatch) => {
-    dispatch({ type: LOGIN_USER });
-
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then((user) => {
-        dispatch({ type: LOGIN_USER_SUCCESS, payload: user });
-      })
-      .catch((error) => {
-        dispatch({ type: LOGIN_USER_FAIL, payload: error.message });
-      });
-  };
-};
-
-// export const loginUser = (email, password) => {
+// export const createAccountWithEmail = (email, password) => {
 //   return (dispatch) => {
+//     dispatch({ type: LOGIN_USER });
+
 //     firebase
 //       .auth()
-//       .signInWithEmailAndPassword(email, password)
+//       .createUserWithEmailAndPassword(email, password)
 //       .then((user) => {
 //         dispatch({ type: LOGIN_USER_SUCCESS, payload: user });
 //       })
@@ -91,9 +73,14 @@ export const createAccountWithEmail = (email, password) => {
 //   };
 // };
 
-// firebase
-//           .auth()
-//           .createUserWithEmailAndPassword(email, password)
-//           .then((user) => {
-//             dispatch({ type: LOGIN_USER_FAIL, payload: user });
-//           });
+export const createAccountWithEmail = (email, password) => async (dispatch) => {
+  dispatch({ type: LOGIN_USER });
+  try {
+    const user = await firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password);
+    await dispatch({ type: LOGIN_USER_SUCCESS, payload: user });
+  } catch (error) {
+    dispatch({ type: LOGIN_USER_FAIL, payload: error.message });
+  }
+};
