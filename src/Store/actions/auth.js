@@ -25,7 +25,7 @@ export const passwordChanged = (text) => {
 };
 
 export const loginUser = (email, password) => {
-  const save = async (key, value) => {
+  const persistUser = async (key, value) => {
     await SecureStore.setItemAsync(key, value);
   };
 
@@ -35,8 +35,8 @@ export const loginUser = (email, password) => {
       const user = await firebase
         .auth()
         .signInWithEmailAndPassword(email, password);
-      await save("email", email);
-      await save("password", password);
+      await persistUser("email", email);
+      await persistUser("password", password);
       await dispatch({ type: LOGIN_USER_SUCCESS, payload: user });
     } catch (error) {
       dispatch({ type: LOGIN_USER_FAIL, payload: error.message });
@@ -56,22 +56,6 @@ export const userLogout = () => {
     }
   };
 };
-
-// export const createAccountWithEmail = (email, password) => {
-//   return (dispatch) => {
-//     dispatch({ type: LOGIN_USER });
-
-//     firebase
-//       .auth()
-//       .createUserWithEmailAndPassword(email, password)
-//       .then((user) => {
-//         dispatch({ type: LOGIN_USER_SUCCESS, payload: user });
-//       })
-//       .catch((error) => {
-//         dispatch({ type: LOGIN_USER_FAIL, payload: error.message });
-//       });
-//   };
-// };
 
 export const createAccountWithEmail = (email, password) => async (dispatch) => {
   dispatch({ type: LOGIN_USER });

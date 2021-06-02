@@ -14,6 +14,7 @@ const Map = () => {
   const routes = useSelector((state) => state.routes.routes);
   const map = useRef();
   const callOutRef = useRef([]);
+  const carouseltRef = useRef([]);
 
   useEffect(() => {
     (async () => {
@@ -25,6 +26,7 @@ const Map = () => {
 
       let location = await Location.getCurrentPositionAsync({});
       setLocation(location);
+      onCarouselItemChange(0);
     })();
   }, []);
 
@@ -38,6 +40,10 @@ const Map = () => {
       longitudeDelta: 0.055,
     });
     callOutRef.current[index].showCallout();
+  };
+
+  const carouselChange = (index) => {
+    carouseltRef.current.snapToItem(index);
   };
 
   return (
@@ -61,6 +67,7 @@ const Map = () => {
               coordinate={routes[index].location}
               key={index}
               ref={(ref) => (callOutRef.current[index] = ref)}
+              onPress={() => carouselChange(index)}
             >
               <Callout>
                 <Text>{routes[index].title}</Text>
@@ -71,6 +78,7 @@ const Map = () => {
       </MapView>
 
       <Carousel
+        ref={carouseltRef}
         containerCustomStyle={styles.carousel}
         removeClippedSubviews={false}
         data={routes}

@@ -3,7 +3,7 @@ import Route from "./models";
 export const ROUTES = [
   new Route(
     "c1",
-    "Italian",
+    "Silence",
     64,
     "#L1",
     "CAT1",
@@ -24,7 +24,7 @@ export const ROUTES = [
   ),
   new Route(
     "c2",
-    "Quick & Easy",
+    "Vasil Vasil",
     50,
     "#L1",
     "CAT1",
@@ -45,7 +45,7 @@ export const ROUTES = [
   ),
   new Route(
     "c3",
-    "Hamburgers",
+    "Change",
     64,
     "#L1",
     "CAT1",
@@ -59,7 +59,7 @@ export const ROUTES = [
   ),
   new Route(
     "c4",
-    "German",
+    "La Dura Dura",
     64,
     "#L1",
     "CAT1",
@@ -77,7 +77,7 @@ export const ROUTES = [
   ),
   new Route(
     "c5",
-    "Light & Lovely",
+    "Move",
     10,
     "#L1",
     "CAT1",
@@ -98,7 +98,7 @@ export const ROUTES = [
   ),
   new Route(
     "c6",
-    "Exotic",
+    "El Bon Combat",
     64,
     "#L1",
     "CAT1",
@@ -115,7 +115,7 @@ export const ROUTES = [
   ),
   new Route(
     "c7",
-    "Breakfast",
+    "Fight Club",
     64,
     "#L1",
     "CAT1",
@@ -132,7 +132,7 @@ export const ROUTES = [
   ),
   new Route(
     "c8",
-    "Asian",
+    "Akira",
     30,
     "#L1",
     "CAT1",

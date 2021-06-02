@@ -65,7 +65,7 @@ const Login = ({ navigation }) => {
                 textContentType="password"
                 secureTextEntry
                 autoCapitalize="none"
-                style={{ color: "white" }}
+                style={{ color: Colors.primary }}
                 onChangeText={(password) => dispatch(passwordChanged(password))}
               />
               <Icon

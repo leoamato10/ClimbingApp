@@ -27,7 +27,6 @@ const RootNavigator = () => {
       } catch (e) {
         console.log(e);
       }
-      // console.log("estesiiii: ", userToken);
     };
 
     getKey();
@@ -56,9 +55,7 @@ const RootNavigator = () => {
   return (
     <NavigationContainer>
       <LoginStack.Navigator screenOptions={stackNavigatorOptions}>
-        {auth.isLoading ? (
-          <LoginStack.Screen name="Splash" component={Splash} />
-        ) : !auth.user ? (
+        {!auth.user ? (
           <>
             <LoginStack.Screen name="Login" component={Login} />
             <LoginStack.Screen name="CreateAccount" component={CreateAccount} />

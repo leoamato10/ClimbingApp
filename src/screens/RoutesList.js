@@ -3,7 +3,7 @@ import { View } from "native-base";
 
 import { useSelector } from "react-redux";
 
-import ScreenHeader from "../components/screensHeader";
+import ScreenHeader from "../components/searchBar";
 import RoutesListCmp from "../components/routesListCmp";
 
 const RoutesScreen = ({ navigation }) => {

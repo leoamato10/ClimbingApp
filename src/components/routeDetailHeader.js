@@ -13,7 +13,7 @@ const routeDetailHeader = ({ item, navigation }) => {
             fontSize: 35,
             color: "black",
           }}
-          onPress={() => navigation.goBack()} //corregir navegacion (pasar de stack a drawer)
+          onPress={() => navigation.pop()} //corregir navegacion (pasar de stack a drawer)
         />
       </Left>
       <Body>

@@ -15,6 +15,7 @@ const initialState = {
   user: null,
   error: "",
   isLoading: false,
+  isLoging: false,
   userToken: "",
 };
 
@@ -27,7 +28,7 @@ export default loginReducer = (state = initialState, action) => {
       return { ...state, password: action.payload };
 
     case LOGIN_USER:
-      return { ...state, isLoading: true, error: "" };
+      return { ...state, isLoading: true, error: "", isLoging: true };
     case LOGIN_USER_SUCCESS:
       return {
         ...state,

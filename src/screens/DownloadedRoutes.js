@@ -2,7 +2,7 @@ import React from "react";
 import { Container, View, Text } from "native-base";
 import { useSelector } from "react-redux";
 
-import ScreenHeader from "../components/screensHeader";
+import ScreenHeader from "../components/searchBar";
 import RoutesListCmp from "../components/routesListCmp";
 
 const DownloadedRoutes = ({ navigation }) => {
@@ -17,7 +17,7 @@ const DownloadedRoutes = ({ navigation }) => {
         {downloadedRoutes.length === 0 ? (
           <Text>No existen descargas</Text>
         ) : (
-          <RoutesListCmp listData={downloadedRoutes} navigation={navigation} />
+          <RoutesListCmp routes={downloadedRoutes} navigation={navigation} />
         )}
       </View>
     </Container>

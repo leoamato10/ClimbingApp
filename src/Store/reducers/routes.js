@@ -16,9 +16,9 @@ const routesReducer = (state = initialState, action) => {
         (route) => route.id === action.routeId
       );
       if (existingIndex >= 0) {
-        const updatedDownRoutes = [...state.downloadedRoutes];
-        updatedDownRoutes.splice(existingIndex, 1);
-        return { ...state, downloadedRoutes: updatedDownRoutes };
+        const updateDownloadedRoutes = [...state.downloadedRoutes];
+        updateDownloadedRoutes.splice(existingIndex, 1);
+        return { ...state, downloadedRoutes: updateDownloadedRoutes };
       } else {
         const route = state.routes.find((route) => route.id === action.routeId);
         return {
