@@ -26,10 +26,6 @@ const RouteItem = ({ item, navigation }) => {
     dispatch(toggleDownloaded(id));
   };
 
-  // useEffect(() => {
-  //   navigation.setParams({ isDownloaded: currentRouteIsDownloaded });
-  // }, [currentRouteIsDownloaded]);
-
   return (
     <Card>
       <CardItem>

@@ -5,12 +5,15 @@ import {
   TextInput,
   View,
   Text,
-  ScrollView,
+  FlatList,
   TouchableHighlight,
+  TouchableOpacity,
 } from "react-native";
 import Animated, { Easing } from "react-native-reanimated";
 import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { useSelector, useDispatch } from "react-redux";
+
+import { searchRoutes } from "../Store/actions/routes";
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
@@ -26,6 +29,25 @@ const screensHeader = ({ title, navigation }) => {
   const [isFocused, setisFocused] = useState(false);
   const [keyword, setkeyword] = useState("");
   const inputRef = useRef();
+  const dispatch = useDispatch();
+  const routes = useSelector((state) => state.routes.routes);
+  const searchedRoutes = useSelector((state) => state.routes.searchedRoutes);
+
+  const showSearchResults = (text) => {
+    setkeyword(text);
+    const searchResult = routes.filter((route) => {
+      return route.title.toLowerCase().includes(text.toLowerCase());
+    });
+    dispatch(searchRoutes(searchResult));
+  };
+
+  const makeSearch = () => {
+    // const searchResult = routes.filter((route) => {
+    //   return route.title.toLowerCase().includes(searchTerm.toLowerCase());
+    // });
+
+    dispatch(searchRoutes(searchResult));
+  };
 
   const onFocus = () => {
     setisFocused(true);
@@ -147,7 +169,8 @@ const screensHeader = ({ title, navigation }) => {
                 placeholder="Buscar"
                 clearButtonMode="always"
                 value={keyword}
-                onChangeText={(text) => setkeyword(text)}
+                onChangeText={(text) => showSearchResults(text)}
+                onSubmitEditing={() => "makeSearch(keyword)"}
               />
             </Animated.View>
           </View>
@@ -165,7 +188,7 @@ const screensHeader = ({ title, navigation }) => {
         ]}
       >
         <>
-          <View style={styles.separator} />
+          <View style={{ height: 1, backgroundColor: "#ccc" }} />
           {keyword === "" ? (
             <View style={styles.insertTextToSearchContainer}>
               <FontAwesome
@@ -177,53 +200,30 @@ const screensHeader = ({ title, navigation }) => {
               <Text>Ingresa el nombre de la ruta deseada</Text>
             </View>
           ) : (
-            <ScrollView style={styles.scrollview}>
-              <View style={styles.searchItem}>
-                <FontAwesome
-                  style={styles.itemIcon}
-                  name="search"
-                  size={16}
-                  color="#ccc"
-                />
-                <Text> FAKE RESULT 1</Text>
-              </View>
-              <View style={styles.searchItem}>
-                <FontAwesome
-                  style={styles.itemIcon}
-                  name="search"
-                  size={16}
-                  color="#ccc"
-                />
-                <Text> FAKE RESULT 2</Text>
-              </View>
-              <View style={styles.searchItem}>
-                <FontAwesome
-                  style={styles.itemIcon}
-                  name="search"
-                  size={16}
-                  color="#ccc"
-                />
-                <Text> FAKE RESULT 3</Text>
-              </View>
-              <View style={styles.searchItem}>
-                <FontAwesome
-                  style={styles.itemIcon}
-                  name="search"
-                  size={16}
-                  color="#ccc"
-                />
-                <Text> FAKE RESULT 4</Text>
-              </View>
-              <View style={styles.searchItem}>
-                <FontAwesome
-                  style={styles.itemIcon}
-                  name="search"
-                  size={16}
-                  color="#ccc"
-                />
-                <Text> FAKE RESULT 5</Text>
-              </View>
-            </ScrollView>
+            <View style={styles.scrollview}>
+              <FlatList
+                renderItem={({ item }) => {
+                  return (
+                    <TouchableOpacity
+                      style={styles.searchItem}
+                      onPress={() =>
+                        navigation.navigate("RouteDetail", { item })
+                      }
+                    >
+                      <FontAwesome
+                        style={styles.itemIcon}
+                        name="search"
+                        size={16}
+                        color="#ccc"
+                      />
+                      <Text> {item.title}</Text>
+                    </TouchableOpacity>
+                  );
+                }}
+                data={searchedRoutes}
+                keyExtractor={(item) => item.id}
+              />
+            </View>
           )}
         </>
       </Animated.View>
@@ -278,24 +278,25 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   content: {
-    width: width,
-    height: height,
+    // width: width,
+    // height: height,
+    flex: 1,
     position: "absolute",
     left: 0,
     bottom: 0,
-    backgroundColor: "white",
     zIndex: 999,
   },
-  separator: { height: 1, backgroundColor: "#ccc" },
   insertTextToSearchContainer: {
-    // height: height,
+    width: width,
+    height: height,
     paddingTop: 20,
     justifyContent: "flex-start",
     alignItems: "center",
     backgroundColor: "white",
   },
   scrollview: {
-    // height: height,
+    width: width,
+    height: height,
     backgroundColor: "white",
   },
   searchItem: {
@@ -312,3 +313,53 @@ const styles = StyleSheet.create({
 });
 
 export default screensHeader;
+
+{
+  /* <ScrollView style={styles.scrollview}>
+              <View style={styles.searchItem}>
+                <FontAwesome
+                  style={styles.itemIcon}
+                  name="search"
+                  size={16}
+                  color="#ccc"
+                />
+                <Text> Fake result 1</Text>
+              </View>
+              <View style={styles.searchItem}>
+                <FontAwesome
+                  style={styles.itemIcon}
+                  name="search"
+                  size={16}
+                  color="#ccc"
+                />
+                <Text> Fake result 2</Text>
+              </View>
+              <View style={styles.searchItem}>
+                <FontAwesome
+                  style={styles.itemIcon}
+                  name="search"
+                  size={16}
+                  color="#ccc"
+                />
+                <Text> Fake result 3</Text>
+              </View>
+              <View style={styles.searchItem}>
+                <FontAwesome
+                  style={styles.itemIcon}
+                  name="search"
+                  size={16}
+                  color="#ccc"
+                />
+                <Text> Fake result 4</Text>
+              </View>
+              <View style={styles.searchItem}>
+                <FontAwesome
+                  style={styles.itemIcon}
+                  name="search"
+                  size={16}
+                  color="#ccc"
+                />
+                <Text> Fake result 5</Text>
+              </View>
+            </ScrollView> */
+}

@@ -1,10 +1,11 @@
 import { ROUTES } from "../../data/data";
-import { TOGGLE_DOWNLOADED } from "../actions/routes";
+import { TOGGLE_DOWNLOADED, SEARCH_ROUTES } from "../actions/routes";
 
 const initialState = {
   routes: ROUTES,
   filteredRoutes: ROUTES,
   favoriteRoutes: [],
+  searchedRoutes: [],
   downloadedRoutes: [],
   doneRoutes: [],
 };
@@ -26,6 +27,8 @@ const routesReducer = (state = initialState, action) => {
           downloadedRoutes: state.downloadedRoutes.concat(route),
         };
       }
+    case SEARCH_ROUTES:
+      return { ...state, searchedRoutes: action.payload };
     default:
       return state;
   }
