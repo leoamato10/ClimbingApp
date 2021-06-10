@@ -16,7 +16,16 @@ const RoutesListCmp = ({ routes, navigation }) => {
   };
 
   return (
-    <View style={{ padding: 10 }}>
+    <View
+      style={{
+        padding: 10,
+        backgroundColor: "white",
+        // position: "absolute",
+        // left: 0,
+        // top: 90,
+        // width: "100%",
+      }}
+    >
       <FlatList
         data={routes}
         showsVerticalScrollIndicator={false}

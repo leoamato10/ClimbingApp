@@ -124,55 +124,60 @@ const screensHeader = ({ title, navigation }) => {
   };
 
   return (
-    <>
-      <View style={{ zIndex: 1000, height: 90 }}>
+    <View style={styles.container}>
+      <View style={styles.SafeAreaView}>
         <View style={styles.header}>
-          <View>
-            <TouchableOpacity
-              activeOpacity={1}
-              underlayColor={"#ccd0d5"}
-              onPress={() => navigation.toggleDrawer()}
-            >
-              <MaterialIcons name="menu" size={35} color="black" />
-            </TouchableOpacity>
-          </View>
-          <View style={{ paddingLeft: 10, flex: 1, justifyContent: "center" }}>
-            <Text style={{ fontSize: 20 }}>{title}</Text>
-          </View>
-          <TouchableHighlight
-            activeOpacity={1}
-            underlayColor={"#ccd0d5"}
-            onPress={onFocus}
-            style={{ borderRadius: 40, padding: 7 }}
-          >
-            <FontAwesome name="search" size={22} color="#000000" />
-          </TouchableHighlight>
-          <Animated.View
-            style={[
-              styles.inputBox,
-              { transform: [{ translateX: inputBoxTraslateX }] },
-            ]}
-          >
-            <Animated.View style={{ opacity: backButtonOpacity }}>
-              <TouchableHighlight
+          <View style={styles.headerInner}>
+            <View>
+              <TouchableOpacity
                 activeOpacity={1}
                 underlayColor={"#ccd0d5"}
-                onPress={onBlur}
-                style={styles.backIconBox}
+                onPress={() => navigation.toggleDrawer()}
+                // style={styles.searchIconBox}
               >
-                <MaterialIcons name="chevron-left" size={24} color="black" />
-              </TouchableHighlight>
+                <MaterialIcons name="menu" size={35} color="black" />
+              </TouchableOpacity>
+            </View>
+            <View
+              style={{ paddingLeft: 10, flex: 1, justifyContent: "center" }}
+            >
+              <Text style={{ fontSize: 20 }}>{title}</Text>
+            </View>
+            <TouchableHighlight
+              activeOpacity={1}
+              underlayColor={"#ccd0d5"}
+              onPress={onFocus}
+              style={styles.searchIconBox}
+            >
+              <FontAwesome name="search" size={22} color="#000000" />
+            </TouchableHighlight>
+            <Animated.View
+              style={[
+                styles.inputBox,
+                { transform: [{ translateX: inputBoxTraslateX }] },
+              ]}
+            >
+              <Animated.View style={{ opacity: backButtonOpacity }}>
+                <TouchableHighlight
+                  activeOpacity={1}
+                  underlayColor={"#ccd0d5"}
+                  onPress={onBlur}
+                  style={styles.backIconBox}
+                >
+                  <MaterialIcons name="chevron-left" size={24} color="black" />
+                </TouchableHighlight>
+              </Animated.View>
+              <TextInput
+                style={styles.input}
+                ref={inputRef}
+                placeholder="Buscar"
+                clearButtonMode="always"
+                value={keyword}
+                onChangeText={(text) => showSearchResults(text)}
+                onSubmitEditing={() => "makeSearch(keyword)"}
+              />
             </Animated.View>
-            <TextInput
-              style={styles.input}
-              ref={inputRef}
-              placeholder="Buscar"
-              clearButtonMode="always"
-              value={keyword}
-              onChangeText={(text) => showSearchResults(text)}
-              onSubmitEditing={() => "makeSearch(keyword)"}
-            />
-          </Animated.View>
+          </View>
         </View>
       </View>
 
@@ -226,22 +231,28 @@ const screensHeader = ({ title, navigation }) => {
           )}
         </>
       </Animated.View>
-    </>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  // container: { zIndex: 9999, position: "relative" },
+  SafeAreaView: { zIndex: 1000, paddingTop: 35, position: "relative" },
   header: {
-    paddingTop: 40,
-    paddingBottom: 10,
-    justifyContent: "center",
+    height: 60,
     paddingHorizontal: 16,
+    // backgroundColor: "red",
+  },
+  headerInner: {
+    flex: 1,
+    overflow: "hidden",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    // borderWidth: 1,
-    // borderColor: "blue",
+    position: "relative",
+    // backgroundColor: "green",
   },
+  searchIconBox: { padding: 10, borderRadius: 40 },
   backIconBox: {
     width: 40,
     height: 40,
@@ -257,9 +268,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "flex-end",
     position: "absolute",
-    top: 28,
-    left: 16,
-    width: width - 30,
+    top: 0,
+    left: 0,
+    // backgroundColor: "white",
+    width: width - 32,
   },
   input: {
     flex: 1,
@@ -271,17 +283,21 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   content: {
-    width: width,
-    height: height - 55,
-    position: "absolute",
-    left: 0,
-    bottom: 0,
-    zIndex: 999,
-    backgroundColor: "white",
-  },
-  insertTextToSearchContainer: {
+    // width: width,
     // height: height,
     flex: 1,
+    // flexGrow: 1,
+    // position: "relative",
+    // left: 0,
+    // bottom: 0,
+    zIndex: 999,
+    flexWrap: "nowrap",
+  },
+  insertTextToSearchContainer: {
+    // width: width,
+    height: height,
+    // flex: 1,
+    // flexGrow: 1,
     paddingTop: 20,
     justifyContent: "flex-start",
     alignItems: "center",
@@ -290,7 +306,10 @@ const styles = StyleSheet.create({
   },
   scrollview: {
     width: width,
+    height: height,
     opacity: 0.95,
+    // flex: 1,
+    // flexGrow: 1,
     backgroundColor: "white",
   },
   searchItem: {
@@ -307,3 +326,53 @@ const styles = StyleSheet.create({
 });
 
 export default screensHeader;
+
+{
+  /* <ScrollView style={styles.scrollview}>
+              <View style={styles.searchItem}>
+                <FontAwesome
+                  style={styles.itemIcon}
+                  name="search"
+                  size={16}
+                  color="#ccc"
+                />
+                <Text> Fake result 1</Text>
+              </View>
+              <View style={styles.searchItem}>
+                <FontAwesome
+                  style={styles.itemIcon}
+                  name="search"
+                  size={16}
+                  color="#ccc"
+                />
+                <Text> Fake result 2</Text>
+              </View>
+              <View style={styles.searchItem}>
+                <FontAwesome
+                  style={styles.itemIcon}
+                  name="search"
+                  size={16}
+                  color="#ccc"
+                />
+                <Text> Fake result 3</Text>
+              </View>
+              <View style={styles.searchItem}>
+                <FontAwesome
+                  style={styles.itemIcon}
+                  name="search"
+                  size={16}
+                  color="#ccc"
+                />
+                <Text> Fake result 4</Text>
+              </View>
+              <View style={styles.searchItem}>
+                <FontAwesome
+                  style={styles.itemIcon}
+                  name="search"
+                  size={16}
+                  color="#ccc"
+                />
+                <Text> Fake result 5</Text>
+              </View>
+            </ScrollView> */
+}

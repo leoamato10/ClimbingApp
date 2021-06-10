@@ -5,7 +5,7 @@ import DrawerNavigator from "./DrawerNavigator";
 
 import Login from "../screens/Login";
 import CreateAccount from "../screens/CreateAccount";
-import Splash from "../screens/Splash";
+// import Splash from "../screens/Splash";
 
 import * as SecureStore from "expo-secure-store";
 import { useSelector, useDispatch } from "react-redux";

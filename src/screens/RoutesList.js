@@ -12,9 +12,7 @@ const RoutesScreen = ({ navigation }) => {
   return (
     <View style={{ backgroundColor: "white" }}>
       <ScreenHeader title="Listado de Rutas" navigation={navigation} />
-      <View style={{ padding: 10 }}>
-        <RoutesListCmp routes={routes} navigation={navigation} />
-      </View>
+      <RoutesListCmp routes={routes} navigation={navigation} />
     </View>
   );
 };

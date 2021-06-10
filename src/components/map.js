@@ -105,17 +105,17 @@ const Map = () => {
 const styles = StyleSheet.create({
   container: {
     width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height - 55,
-    backgroundColor: "red",
+    height: Dimensions.get("window").height - 60,
+    // backgroundColor: "red",
   },
   mapStyle: {
-    width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height,
+    // width: Dimensions.get("window").width,
+    // height: Dimensions.get("window").height,
+    flex: 1,
   },
   carousel: {
     position: "absolute",
     bottom: 0,
-    // marginBottom: 48,
   },
   cardContainer: {
     backgroundColor: "rgba(0,0,0,0.7)",
