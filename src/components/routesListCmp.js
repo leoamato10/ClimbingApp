@@ -1,6 +1,6 @@
 import React from "react";
 import { View } from "native-base";
-import { FlatList, TouchableOpacity } from "react-native";
+import { FlatList, TouchableOpacity, Dimensions } from "react-native";
 
 import RouteItem from "./routeItemCmp";
 
@@ -20,10 +20,8 @@ const RoutesListCmp = ({ routes, navigation }) => {
       style={{
         padding: 10,
         backgroundColor: "white",
-        // position: "absolute",
-        // left: 0,
-        // top: 90,
-        // width: "100%",
+        width: Dimensions.get("window").width,
+        height: Dimensions.get("window").height - 60,
       }}
     >
       <FlatList
