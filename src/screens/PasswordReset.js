@@ -40,7 +40,7 @@ const PasswordReset = ({ navigation }) => {
         style={{
           justifyContent: "center",
           flex: 1,
-          padding: 5,
+          padding: 50,
         }}
       >
         <Card>
