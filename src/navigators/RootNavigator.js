@@ -5,7 +5,7 @@ import DrawerNavigator from "./DrawerNavigator";
 
 import Login from "../screens/Login";
 import CreateAccount from "../screens/CreateAccount";
-// import Splash from "../screens/Splash";
+import PasswordReset from "../screens/PasswordReset";
 
 import * as SecureStore from "expo-secure-store";
 import { useSelector, useDispatch } from "react-redux";
@@ -59,6 +59,7 @@ const RootNavigator = () => {
           <>
             <LoginStack.Screen name="Login" component={Login} />
             <LoginStack.Screen name="CreateAccount" component={CreateAccount} />
+            <LoginStack.Screen name="PasswordReset" component={PasswordReset} />
           </>
         ) : (
           <LoginStack.Screen

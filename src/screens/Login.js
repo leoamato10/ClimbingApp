@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Image,
   Text,
   StyleSheet,
-  ImageBackground,
   TouchableOpacity,
+  Dimensions,
 } from "react-native";
 import {
   Button,
@@ -27,60 +27,42 @@ import {
 
 import Colors from "../shared/colors";
 
+const windowHeight = Dimensions.get("window").height;
+
 const Login = ({ navigation }) => {
+  const [showPassword, setShowPassword] = useState(true);
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
 
   return (
-    <ImageBackground
-      source={require("../../assets/images/login_background.jpg")}
-      style={styles.Container}
-    >
+    <>
       <View
         style={{
-          // borderColor: "red",
-          // borderWidth: 5,
           justifyContent: "center",
           flex: 1,
-          padding: 10,
+          padding: 5,
         }}
       >
         <Card>
-          <CardItem
-            style={
-              {
-                // borderColor: "blue",
-                // borderWidth: 5,
-              }
-            }
-          >
+          <CardItem>
             <View style={styles.logo}>
-              <Image source={require("../../assets/logo/logo.png")} />
-              <Text style={styles.Text}>CLIMBING LOC</Text>
+              <Image source={require("../../assets/logo/logo_app.png")} />
             </View>
           </CardItem>
-          <CardItem
-            header
-            style={
-              {
-                // borderColor: "green",
-                // borderWidth: 5,
-              }
-            }
-          >
+          <CardItem header>
             <Text style={{ fontSize: 18 }}>
               Ingresa tus datos para acceder:
             </Text>
           </CardItem>
           <CardItem
-            style={{
-              // borderColor: "yellow",
-              // borderWidth: 5,
-              height: 300,
-            }}
+            style={
+              windowHeight > 500
+                ? { height: windowHeight / 3 }
+                : { height: windowHeight / 4 }
+            }
           >
+            {/* FORM */}
             <Body>
-              {/* FORM */}
               <View style={{ width: "100%" }}>
                 {/* BOTONES INPUTS */}
                 <View>
@@ -90,25 +72,23 @@ const Login = ({ navigation }) => {
                     style={{ backgroundColor: "#ccc", marginBottom: 10 }}
                   >
                     <Icon
-                      type="FontAwesome"
-                      name="user"
+                      type="MaterialIcons"
+                      name="person"
                       style={{ color: Colors.primary }}
                     />
                     <Input
-                      placeholder="Usuario"
+                      placeholder="Correo"
                       placeholderTextColor={"black"}
                       autoCorrect={false}
                       autoCapitalize="none"
+                      returnKeyType={"next"}
                       style={{ color: Colors.primary }}
                       onChangeText={(user) => dispatch(emailChanged(user))}
                       value={auth.email}
                     />
                   </Item>
-                  <Item
-                    rounded
-                    regular
-                    style={{ backgroundColor: "#ccc", marginBottom: 20 }}
-                  >
+
+                  <Item rounded regular style={{ backgroundColor: "#ccc" }}>
                     <Icon
                       type="MaterialIcons"
                       name="lock"
@@ -119,7 +99,7 @@ const Login = ({ navigation }) => {
                       placeholderTextColor={"black"}
                       autoCorrect={false}
                       textContentType="password"
-                      secureTextEntry
+                      secureTextEntry={showPassword}
                       autoCapitalize="none"
                       style={{ color: Colors.primary }}
                       onChangeText={(password) =>
@@ -130,19 +110,23 @@ const Login = ({ navigation }) => {
                       active
                       name="eye"
                       style={{ fontSize: 25, color: Colors.primary }}
+                      onPress={() => setShowPassword(!showPassword)}
                     />
                   </Item>
                 </View>
 
                 {/* ERROR */}
 
-                <View>
+                <View
+                  style={{
+                    paddingVertical: 10,
+                  }}
+                >
                   {auth.error !== "" ? (
-                    <Text style={styles.error}>{auth.error}</Text>
+                    <Text style={styles.error}> {auth.error} </Text>
                   ) : null}
                 </View>
 
-                {/* BOTONES INGRESAR-GOOGLE-FACEBOOK*/}
                 <View>
                   <Button
                     full
@@ -169,6 +153,7 @@ const Login = ({ navigation }) => {
                         color: Colors.primary,
                         fontWeight: "bold",
                       }}
+                      onPress={() => navigation.navigate("PasswordReset")}
                     >
                       Recuperar contraseña.
                     </Text>
@@ -183,6 +168,7 @@ const Login = ({ navigation }) => {
                 flex: 1,
                 justifyContent: "center",
                 alignItems: "center",
+                paddingBottom: 30,
               }}
             >
               <TouchableOpacity
@@ -196,7 +182,7 @@ const Login = ({ navigation }) => {
           </CardItem>
         </Card>
       </View>
-    </ImageBackground>
+    </>
   );
 };
 
@@ -208,7 +194,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginVertical: 50,
+    marginVertical: windowHeight / 16,
   },
   buttonsContainer: {
     flexDirection: "row",
@@ -226,7 +212,7 @@ const styles = StyleSheet.create({
     color: "red",
     justifyContent: "center",
     textAlign: "center",
-    fontWeight: "bold",
+    // fontWeight: "bold",
   },
 });
 

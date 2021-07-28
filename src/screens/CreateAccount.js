@@ -43,7 +43,7 @@ const CreateAccount = ({ navigation }) => {
         </View>
 
         <View style={styles.logo}>
-          <Image source={require("../../assets/logo/logo.png")} />
+          <Image source={require("../../assets/logo/logo_app.png")} />
           <Text style={styles.Text}>CLIMBING LOC</Text>
         </View>
 
@@ -106,7 +106,7 @@ const CreateAccount = ({ navigation }) => {
               )}
             </Button>
 
-            <View style={styles.buttonsContainer}>
+            {/* <View style={styles.buttonsContainer}>
               <Button
                 style={{
                   width: "47%",
@@ -133,7 +133,7 @@ const CreateAccount = ({ navigation }) => {
                   style={{ color: Colors.primary }}
                 />
               </Button>
-            </View>
+            </View> */}
           </View>
         </View>
       </View>
